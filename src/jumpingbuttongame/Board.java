@@ -13,7 +13,7 @@ public class Board extends JPanel implements ActionListener, MouseMotionListener
 {
     public Board()
     {
-        
+        super();
     }
     
      public void actionPerformed(ActionEvent event) {
