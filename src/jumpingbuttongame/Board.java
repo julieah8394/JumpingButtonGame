@@ -25,7 +25,10 @@ public class Board extends JPanel implements ActionListener, MouseMotionListener
     public Board()
     {
         super();
+        // build the screen
         initComponents();
+        // start the timer
+        t.start();
     }
     
      public void actionPerformed(ActionEvent event) {

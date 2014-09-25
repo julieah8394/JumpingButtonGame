@@ -31,6 +31,8 @@ public class Menu extends JPanel
     
     public void changeDifficulty(){
         
+        // how is difficulty set?
+        
     }
     
     
