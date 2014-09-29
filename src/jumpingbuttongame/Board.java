@@ -1,5 +1,6 @@
 package jumpingbuttongame;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -14,25 +15,34 @@ import javax.swing.Timer;
 public class Board extends JPanel implements ActionListener, MouseMotionListener
 {
     Menu m;
-    int delay;    
+    int delay = 500;   
     Timer t = new Timer(delay, this);
     
     JButton jumpingButton = new JButton();
     
-    int mouseX;
-    int mouseY;
+    int mouseX = 500;
+    int mouseY = 200;
 
     public Board(Menu menu)
     {
     	super();
+        setLayout(null);
         m = menu;
+        jumpingButton.setLocation(mouseX,mouseY);
+        jumpingButton.setBounds(new Rectangle(mouseX,mouseY,50,50));
+        jumpingButton.addActionListener(this);
+        add(jumpingButton);
+        setBackground(Color.red);
+        m.setBackground(Color.white);
+        add(m);
+        m.startGame.addActionListener(this);
+        
+       
        
     }
     public void runNormal()
-    {
-        
+    { 
         //this is the game loop
-
     }
 	 
     public void runFromMouse()
@@ -58,25 +68,17 @@ public class Board extends JPanel implements ActionListener, MouseMotionListener
 
     }
 	 
-    public void initComponents()
-    {
-     	jumpingButton.setLocation(200, 200);
-        jumpingButton.setBounds(new Rectangle(mouseX,mouseY,100,100));
-        jumpingButton.addActionListener(this);
-        this.add(jumpingButton);
-    } 
-    
     
     
     
     public void actionPerformed(ActionEvent event)
     {
-        if(event.getSource()==m.startGame)
+        Object obj = event.getSource();
+        if(obj==m.startGame)
         {
             t.start();
         }
-        if(event.getSource()==m.easy || event.getSource()==m.medium 
-                || event.getSource()==m.hard)
+        if(obj==m.easy || obj==m.medium || obj==m.hard)
         {
             delay = m.changeDifficulty();
         }
