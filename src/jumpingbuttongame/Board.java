@@ -13,68 +13,87 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener, MouseMotionListener
 {
+    Menu m;
+    int delay;    
+    Timer t = new Timer(delay, this);
     
-    Timer t = new Timer(10, this);
-    int delay = 1;
     JButton jumpingButton = new JButton();
+    
     int mouseX;
     int mouseY;
-    
-    
-    
-    public Board()
+
+    public Board(Menu menu)
     {
-        super();
-        // build the screen
-        initComponents();
-        // start the timer
-        t.start();
+    	super();
+        m = menu;
+       
+    }
+    public void runNormal()
+    {
+        
+        //this is the game loop
+
+    }
+	 
+    public void runFromMouse()
+    {
+        // get x and y coordinates from mouse and JButton
+        int buttonX = jumpingButton.getX();
+        int buttonY = jumpingButton.getY();
+        int mouseX = jumpingButton.getMousePosition().x;
+        int mouseY = jumpingButton.getMousePosition().y;
+
+        int xDistance = Math.abs(buttonX - mouseX);
+        int yDistance = Math.abs(buttonY - mouseY);
+
+        if (xDistance < 30)
+        {
+
+        }
+        
+        if (yDistance < 30)
+        {
+
+        }
+
+    }
+	 
+    public void initComponents()
+    {
+     	jumpingButton.setLocation(200, 200);
+        jumpingButton.setBounds(new Rectangle(mouseX,mouseY,100,100));
+        jumpingButton.addActionListener(this);
+        this.add(jumpingButton);
+    } 
+    
+    
+    
+    
+    public void actionPerformed(ActionEvent event)
+    {
+        if(event.getSource()==m.startGame)
+        {
+            t.start();
+        }
+        if(event.getSource()==m.easy || event.getSource()==m.medium 
+                || event.getSource()==m.hard)
+        {
+            delay = m.changeDifficulty();
+        }
     }
     
-     public void actionPerformed(ActionEvent event) {
-         
-     }
-     public void mouseMoved(MouseEvent evt)
-     {
-    	 Point pt = evt.getPoint();
-        
-     }
-     public void mouseDragged(MouseEvent evt)
-     {
-    	
-     }
-     
-     
-     public void runNormal(){
-         
-         //this is the game loop
-         
-     }
-     
-     public void runFromMouse(){
-         // get x and y coordinates from mouse and JButton
-    int buttonX = jumpingButton.getX();
-    int buttonY = jumpingButton.getY();
-    int mouseX = jumpingButton.getMousePosition().x;
-    int mouseY = jumpingButton.getMousePosition().y;
+    public void mouseMoved(MouseEvent evt)
+    {
+        Point ptMoved = evt.getPoint();
+    }
     
-   int xDistance = Math.abs(buttonX - mouseX);
-   int yDistance = Math.abs(buttonY - mouseY);
     
-   if (xDistance < 30){
-       
-   }
-    if (yDistance < 30){
-       
-   }
+   public void mouseDragged(MouseEvent evt)
+    {
+        Point ptDragged = evt.getPoint();
+    }
     
-     }
-     
-     public void initComponents(){
-         this.add(jumpingButton);
-         //jumpingButton.setLocation(mouseX, mouseY);
-         jumpingButton.setLocation(200, 200);
-         
-     }
-     
+    
 }
+
+
